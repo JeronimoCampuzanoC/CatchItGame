@@ -1,0 +1,23 @@
+class Points {
+    field int points; // Declare points variable
+    constructor Points new() {
+        let points = 0;  // Initialize points to 0
+        return this;
+    }
+    // Method to add a point
+    method void addPoint() {
+        let points = points + 1; // Increment points by 1
+        return;
+    }
+
+    // Method to reset points to 0
+    method void resetPoint() {
+        let points = 0; // Reset points to 0
+        return;
+    }
+
+    // Method to get the current points
+    method int getPoint() {
+        return points; // Return current points
+    }
+}

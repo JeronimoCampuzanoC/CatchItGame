@@ -1,0 +1,22 @@
+class ScreenInitial {
+
+    function void divideIntoFourColumns() {
+        var int width, x1, x2, x3;
+
+        let width = 512 / 4;   // each column = 128 px
+
+        // Draw vertical dividers at x = 128, 256, 384
+        let x1 = width;
+        let x2 = width * 2;
+        let x3 = width * 3;
+
+        do Screen.drawLine(x1, 0, x1, 255);
+        do Screen.drawLine(x2, 0, x2, 255);
+        do Screen.drawLine(x3, 0, x3, 255);
+
+        do Screen.drawRectangle(0, 192, 511, 192);
+        do Screen.drawRectangle(0, 240, 511, 240);
+
+        return;
+    }
+}

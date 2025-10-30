@@ -1,0 +1,54 @@
+// SpadeSprite.jack
+// Draws a 32x32 spade at the top of a given column (1..4).
+class SpadeSprite {
+
+    function void drawAtColumnTop(int column) {
+        do SpadeSprite.drawAtColumnTopWithOffset(column, 0);
+        return;
+    }
+
+    function void drawAtColumnTopWithOffset(int column, int yOffset) {
+        var int colWidth, cx;
+        let colWidth = 512 / 4;                             // 128 px
+        let cx = (column - 1) * colWidth + (colWidth / 2);  // centers: 64,192,320,448
+        do SpadeSprite.drawSpade32At(cx, yOffset);
+        return;
+    }
+
+    // Stylized spade: point on top, bulb in middle, stem + base at bottom.
+    function void drawSpade32At(int cx, int yTop) {
+        var Array w; var int i, y, half, x0, x1;
+
+        // Widths per row (0..31). Max ~32. Tapers to point at top, stem at bottom.
+        let w = Array.new(32);
+        // tip (narrow → wider)
+        let w[0]  = 2;   let w[1]  = 4;   let w[2]  = 6;   let w[3]  = 8;
+        let w[4]  = 10;  let w[5]  = 12;  let w[6]  = 16;  let w[7]  = 20;
+        // bulb
+        let w[8]  = 24;  let w[9]  = 28;  let w[10] = 30;  let w[11] = 32;
+        let w[12] = 32;  let w[13] = 30;  let w[14] = 28;  let w[15] = 26;
+        let w[16] = 24;  let w[17] = 22;  let w[18] = 20;  let w[19] = 18;
+        // neck to stem
+        let w[20] = 14;  let w[21] = 12;
+        // cross-guard flare (slight)
+        let w[22] = 16;
+        // stem (straight)
+        let w[23] = 6;   let w[24] = 6;   let w[25] = 6;   let w[26] = 6;
+        // base / pommel
+        let w[27] = 10;  let w[28] = 10;
+        // small taper end
+        let w[29] = 8;   let w[30] = 6;   let w[31] = 4;
+
+        let i = 0;
+        while (i < 32) {
+            let half = w[i] / 2;
+            let x0 = cx - half;
+            let x1 = cx + half - 1;
+            let y = yTop + i;
+            do Screen.drawRectangle(x0, y, x1, y);
+            let i = i + 1;
+        }
+        do w.dispose();
+        return;
+    }
+}

@@ -1,0 +1,125 @@
+class Main {
+    function void main() {
+        
+        // Variables para manejar la figurita esa
+        var int y, prevY, speed, maxY, active;
+        var Points pointsObject;
+
+        // Variables pa ver lo del teclado
+        var int key, lastKey;
+
+        // Variables para lo de la ventana de oportunidad pa apretar la tecla
+        // (DBD Reference oyeah)
+        var int targetY, window, dy;
+
+        // Los valores iniciales para cuando empezamos a correr el programa
+        let speed   = 2;
+        let y       = 0;
+        let prevY   = -1;
+        let maxY    = 256 - 32;
+
+        let targetY = 200;
+        let window  = 8;
+        let active  = 1;
+        let lastKey = 0;
+
+        // Instantiate Points
+        let pointsObject = Points.new();
+
+        do Screen.clearScreen();
+
+        while (y < (maxY + 1)) {
+            let key = Keyboard.keyPressed();
+
+            // Checkea lo de la tecla, y si la coge frena el programa
+            if (key = 130) {
+                if (~(lastKey = 130)) {
+                    let dy = y - targetY;
+                    if (dy < 0) { let dy = 0 - dy; }
+                    if (dy < (window + 1)) {
+                        if (active = 1) {
+                            do Screen.setColor(false);
+                            do HeartSprite.drawAtColumnTopWithOffset(1, y);
+                            let active = 0;
+                            do pointsObject.addPoint();
+                        }
+                    }
+                }
+            }
+
+            if (key = 131) {
+                if (~(lastKey = 131)) {
+                    let dy = y - targetY;
+                    if (dy < 0) { let dy = 0 - dy; }
+                    if (dy < (window + 1)) {
+                        if (active = 1) {
+                            do Screen.setColor(false);
+                            do SpadeSprite.drawAtColumnTopWithOffset(2, y);
+                            let active = 0;
+                            do pointsObject.addPoint();
+                        }
+                    }
+                }
+            }
+
+            if (key = 132) {
+                if (~(lastKey = 132)) {
+                    let dy = y - targetY;
+                    if (dy < 0) { let dy = 0 - dy; }
+                    if (dy < (window + 1)) {
+                        if (active = 1) {
+                            do Screen.setColor(false);
+                            do ClubSprite.drawAtColumnTopWithOffset(4, y);
+                            let active = 0;
+                             do pointsObject.addPoint();
+                        }
+                    }
+                }
+            }
+
+            if (key = 133) {
+                if (~(lastKey = 133)) {
+                    let dy = y - targetY;
+                    if (dy < 0) { let dy = 0 - dy; }
+                    if (dy < (window + 1)) {
+                        if (active = 1) {
+                            do Screen.setColor(false);
+                            do DiamondSprite.drawAtColumnTopWithOffset(3, y);
+                            let active = 0;
+                             do pointsObject.addPoint();
+                        }
+                    }
+                }
+            }
+
+            // Borrado en la posicion anterior
+            if (prevY > (-1)) {
+                do Screen.setColor(false);
+                if (active = 1) {
+                    do HeartSprite.drawAtColumnTopWithOffset(1, prevY);
+                    do SpadeSprite.drawAtColumnTopWithOffset(2, prevY);
+                    do DiamondSprite.drawAtColumnTopWithOffset(3, prevY);
+                do ClubSprite.drawAtColumnTopWithOffset(4, prevY);
+                }
+            }
+
+            // Creado en la posicion nueva
+            do Screen.setColor(true);
+            do ScreenInitial.divideIntoFourColumns();
+            if (active = 1) {
+                do HeartSprite.drawAtColumnTopWithOffset(1, y);
+                do SpadeSprite.drawAtColumnTopWithOffset(2, y);
+                do DiamondSprite.drawAtColumnTopWithOffset(3, y);
+                do ClubSprite.drawAtColumnTopWithOffset(4, y);
+            }
+
+            // Actualiza valores
+            let prevY = y;
+            let y = y + speed;
+            let lastKey = key;
+            do Sys.wait(16);
+        }
+
+        return;
+    }
+}
