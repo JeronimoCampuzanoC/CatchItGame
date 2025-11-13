@@ -1,8 +1,11 @@
 class Main {
     function void main() {
         
-        // Variables para manejar la figurita esa
-        var int y1,y2,y3,y4, prevY1,prevY2,prevY3,prevY4, speed, maxY, active;
+        // Objetos de sprites
+        var HeartSprite heartSprite;
+        var SpadeSprite spadeSprite;
+        var DiamondSprite diamondSprite;
+        var ClubSprite clubSprite;
         var Points pointsObject;
 
         // Variables pa ver lo del teclado
@@ -10,32 +13,22 @@ class Main {
 
         // Variables para lo de la ventana de oportunidad pa apretar la tecla
         // (DBD Reference oyeah)
-        var int targetY, window, dy;
+        var int speed, maxY, targetY, window, dy;
         var bool gameRunning;
 
         // Los valores iniciales para cuando empezamos a correr el programa
         let speed   = 2;
         let maxY    = 256 - 32;
-
-        // Height values for each SpadeSprite
-        let y1       = 0;
-        let prevY1   = -1;
-        let y2       = 0;
-        let prevY2   = -1;
-        let y3       = 0;
-        let prevY3   = -1;
-        let y4       = 0;
-        let prevY4   = -1;
-
         let targetY = 200;
         let window  = 8;
-        let active  = 1;
         let lastKey = 0;
-
-        
         let gameRunning = true;
 
-        // Instantiate Points
+        // Instantiate sprites and points
+        let heartSprite = HeartSprite.new(1);
+        let spadeSprite = SpadeSprite.new(2);
+        let diamondSprite = DiamondSprite.new(3);
+        let clubSprite = ClubSprite.new(4);
         let pointsObject = Points.new();
 
         do Screen.clearScreen();
@@ -46,13 +39,11 @@ class Main {
             // Checkea lo de la tecla, y si la coge frena el programa
             if (key = 130) {
                 if (~(lastKey = 130)) {
-                    let dy = y1 - targetY;
-                    if (dy < 0) { let dy = 0 - dy; }
+                    let dy = heartSprite.getDistanceFrom(targetY);
                     if (dy < (window + 1)) {
-                        if (active = 1) {
-                            do Screen.setColor(false);
-                            do HeartSprite.drawAtColumnTopWithOffset(1, y1);
-                            let active = 0;
+                        if (heartSprite.isActive()) {
+                            do heartSprite.eraseCurrent();
+                            do heartSprite.setActive(false);
                             do pointsObject.addPoint();
                         }
                     }
@@ -61,13 +52,11 @@ class Main {
 
             if (key = 131) {
                 if (~(lastKey = 131)) {
-                    let dy = y2 - targetY;
-                    if (dy < 0) { let dy = 0 - dy; }
+                    let dy = spadeSprite.getDistanceFrom(targetY);
                     if (dy < (window + 1)) {
-                        if (active = 1) {
-                            do Screen.setColor(false);
-                            do SpadeSprite.drawAtColumnTopWithOffset(2, y2);
-                            let active = 0;
+                        if (spadeSprite.isActive()) {
+                            do spadeSprite.eraseCurrent();
+                            do spadeSprite.setActive(false);
                             do pointsObject.addPoint();
                         }
                     }
@@ -76,14 +65,12 @@ class Main {
 
             if (key = 132) {
                 if (~(lastKey = 132)) {
-                    let dy = y4 - targetY;
-                    if (dy < 0) { let dy = 0 - dy; }
+                    let dy = clubSprite.getDistanceFrom(targetY);
                     if (dy < (window + 1)) {
-                        if (active = 1) {
-                            do Screen.setColor(false);
-                            do ClubSprite.drawAtColumnTopWithOffset(4, y4);
-                            let active = 0;
-                             do pointsObject.addPoint();
+                        if (clubSprite.isActive()) {
+                            do clubSprite.eraseCurrent();
+                            do clubSprite.setActive(false);
+                            do pointsObject.addPoint();
                         }
                     }
                 }
@@ -91,69 +78,62 @@ class Main {
 
             if (key = 133) {
                 if (~(lastKey = 133)) {
-                    let dy = y3 - targetY;
-                    if (dy < 0) { let dy = 0 - dy; }
+                    let dy = diamondSprite.getDistanceFrom(targetY);
                     if (dy < (window + 1)) {
-                        if (active = 1) {
-                            do Screen.setColor(false);
-                            do DiamondSprite.drawAtColumnTopWithOffset(3, y3);
-                            let active = 0;
-                             do pointsObject.addPoint();
+                        if (diamondSprite.isActive()) {
+                            do diamondSprite.eraseCurrent();
+                            do diamondSprite.setActive(false);
+                            do pointsObject.addPoint();
                         }
                     }
                 }
             }
 
             // Borrado en la posicion anterior
-            if (prevY1 > (-1)) {
-                do Screen.setColor(false);
-                if (active = 1) {
-                    do HeartSprite.drawAtColumnTopWithOffset(1, prevY1);
-                }
+            if (heartSprite.isActive()) {
+                do heartSprite.erase();
             }
-            if (prevY2 > (-1)) {
-                do Screen.setColor(false);
-                if (active = 1) {
-                    do SpadeSprite.drawAtColumnTopWithOffset(2, prevY2);
-                }
+            if (spadeSprite.isActive()) {
+                do spadeSprite.erase();
             }
-            if (prevY3 > (-1)) {
-                do Screen.setColor(false);
-                if (active = 1) {
-                    
-                    do DiamondSprite.drawAtColumnTopWithOffset(3, prevY3);
-                }
+            if (diamondSprite.isActive()) {
+                do diamondSprite.erase();
             }
-            if (prevY4 > (-1)) {
-                do Screen.setColor(false);
-                if (active = 1) {
-                    do ClubSprite.drawAtColumnTopWithOffset(4, prevY4);
-                }
+            if (clubSprite.isActive()) {
+                do clubSprite.erase();
             }
 
             // Creado en la posicion nueva
             do Screen.setColor(true);
             do ScreenInitial.divideIntoFourColumns();
-            if (active = 1) {
-                do HeartSprite.drawAtColumnTopWithOffset(1, y1);
-                do SpadeSprite.drawAtColumnTopWithOffset(2, y2);
-                do DiamondSprite.drawAtColumnTopWithOffset(3, y3);
-                do ClubSprite.drawAtColumnTopWithOffset(4, y4);
+            if (heartSprite.isActive()) {
+                do heartSprite.draw();
+            }
+            if (spadeSprite.isActive()) {
+                do spadeSprite.draw();
+            }
+            if (diamondSprite.isActive()) {
+                do diamondSprite.draw();
+            }
+            if (clubSprite.isActive()) {
+                do clubSprite.draw();
             }
 
             // Actualiza valores
-            let prevY1 = y1;
-            let prevY2 = y2;
-            let prevY3 = y3;
-            let prevY4 = y4;
-            let y1 = y1 + speed;
-            let y2 = y2 + speed;
-            let y3 = y3 + speed;
-            let y4 = y4 + speed;
+            do heartSprite.updatePosition(speed);
+            do spadeSprite.updatePosition(speed);
+            do diamondSprite.updatePosition(speed);
+            do clubSprite.updatePosition(speed);
             
             let lastKey = key;
             do Sys.wait(16);
         }
+
+        // Cleanup
+        do heartSprite.dispose();
+        do spadeSprite.dispose();
+        do diamondSprite.dispose();
+        do clubSprite.dispose();
 
         return;
     }

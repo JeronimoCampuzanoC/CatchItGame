@@ -2,6 +2,74 @@
 // Draws a 32x32 club at the top of a given column (1..4).
 // Three lobes (top/left/right) + short stem and base.
 class ClubSprite {
+    field int y, prevY, column;
+    field bool active;
+
+    constructor ClubSprite new(int col) {
+        let column = col;
+        let y = 0;
+        let prevY = -1;
+        let active = true;
+        return this;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method int getY() {
+        return y;
+    }
+
+    method void setY(int newY) {
+        let y = newY;
+        return;
+    }
+
+    method void updatePosition(int speed) {
+        let prevY = y;
+        let y = y + speed;
+        return;
+    }
+
+    method void draw() {
+        do Screen.setColor(true);
+        do ClubSprite.drawAtColumnTopWithOffset(column, y);
+        return;
+    }
+
+    method void erase() {
+        if (prevY > (-1)) {
+            do Screen.setColor(false);
+            do ClubSprite.drawAtColumnTopWithOffset(column, prevY);
+        }
+        return;
+    }
+
+    method void eraseCurrent() {
+        do Screen.setColor(false);
+        do ClubSprite.drawAtColumnTopWithOffset(column, y);
+        return;
+    }
+
+    method bool isActive() {
+        return active;
+    }
+
+    method void setActive(bool val) {
+        let active = val;
+        return;
+    }
+
+    method int getDistanceFrom(int targetY) {
+        var int dy;
+        let dy = y - targetY;
+        if (dy < 0) {
+            let dy = 0 - dy;
+        }
+        return dy;
+    }
 
     function void drawAtColumnTop(int column) {
         do ClubSprite.drawAtColumnTopWithOffset(column, 0);
@@ -27,11 +95,14 @@ class ClubSprite {
 
         let i = 0;
         while (i < 6) {
-            let half = w[i] / 2;
-            let x0 = cx - half;
-            let x1 = cx + half - 1;
             let y = yTop + i;
-            do Screen.drawRectangle(x0, y, x1, y);
+            // Only draw if within screen bounds
+            if ((y > (-1)) & (y < 256)) {
+                let half = w[i] / 2;
+                let x0 = cx - half;
+                let x1 = cx + half - 1;
+                do Screen.drawRectangle(x0, y, x1, y);
+            }
             let i = i + 1;
         }
 
@@ -51,17 +122,20 @@ class ClubSprite {
 
         let i = 0;
         while (i < 8) {
-            let halfGap = gc[i] / 2;
-            // Left span
-            let left1 = cx - halfGap - 1;
-            let left0 = left1 - gl[i] + 1;
-            // Right span
-            let right0 = cx + halfGap;
-            let right1 = right0 + gl[i] - 1;
-
             let y = yTop + 6 + i;
-            do Screen.drawRectangle(left0,  y, left1,  y);
-            do Screen.drawRectangle(right0, y, right1, y);
+            // Only draw if within screen bounds
+            if ((y > (-1)) & (y < 256)) {
+                let halfGap = gc[i] / 2;
+                // Left span
+                let left1 = cx - halfGap - 1;
+                let left0 = left1 - gl[i] + 1;
+                // Right span
+                let right0 = cx + halfGap;
+                let right1 = right0 + gl[i] - 1;
+
+                do Screen.drawRectangle(left0,  y, left1,  y);
+                do Screen.drawRectangle(right0, y, right1, y);
+            }
 
             let i = i + 1;
         }
@@ -90,11 +164,14 @@ class ClubSprite {
 
         let i = 0;
         while (i < 18) {
-            let half = gr[i] / 2;
-            let x0 = cx - half;
-            let x1 = cx + half - 1;
             let y = yTop + 14 + i;
-            do Screen.drawRectangle(x0, y, x1, y);
+            // Only draw if within screen bounds
+            if ((y > (-1)) & (y < 256)) {
+                let half = gr[i] / 2;
+                let x0 = cx - half;
+                let x1 = cx + half - 1;
+                do Screen.drawRectangle(x0, y, x1, y);
+            }
             let i = i + 1;
         }
 

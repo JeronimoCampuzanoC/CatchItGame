@@ -1,3 +1,127 @@
+function HeartSprite.new 0
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 2
+push constant 0
+pop this 0
+push constant 1
+neg
+pop this 1
+push constant 0
+not
+pop this 3
+push pointer 0
+return
+function HeartSprite.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function HeartSprite.getY 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function HeartSprite.setY 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 0
+push constant 0
+return
+function HeartSprite.updatePosition 0
+push argument 0
+pop pointer 0
+push this 0
+pop this 1
+push this 0
+push argument 1
+add
+pop this 0
+push constant 0
+return
+function HeartSprite.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 2
+push this 0
+call HeartSprite.drawAtColumnTopWithOffset 2
+pop temp 0
+push constant 0
+return
+function HeartSprite.erase 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+neg
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 2
+push this 1
+call HeartSprite.drawAtColumnTopWithOffset 2
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function HeartSprite.eraseCurrent 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 2
+push this 0
+call HeartSprite.drawAtColumnTopWithOffset 2
+pop temp 0
+push constant 0
+return
+function HeartSprite.isActive 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function HeartSprite.setActive 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 3
+push constant 0
+return
+function HeartSprite.getDistanceFrom 1
+push argument 0
+pop pointer 0
+push this 0
+push argument 1
+sub
+pop local 0
+push local 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+push local 0
+sub
+pop local 0
+label IF_FALSE0
+push local 0
+return
 function HeartSprite.drawAtColumnTop 0
 push argument 0
 push constant 0
@@ -105,6 +229,21 @@ push constant 4
 lt
 not
 if-goto WHILE_END0
+push argument 1
+push local 3
+add
+pop local 5
+push local 5
+push constant 1
+neg
+gt
+push local 5
+push constant 256
+lt
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push local 3
 push local 1
 add
@@ -147,10 +286,6 @@ add
 push constant 1
 sub
 pop local 13
-push argument 1
-push local 3
-add
-pop local 5
 push local 10
 push local 5
 push local 11
@@ -163,6 +298,7 @@ push local 13
 push local 5
 call Screen.drawRectangle 4
 pop temp 0
+label IF_FALSE0
 push local 3
 push constant 1
 add
@@ -404,6 +540,23 @@ push constant 28
 lt
 not
 if-goto WHILE_END1
+push argument 1
+push constant 4
+add
+push local 4
+add
+pop local 5
+push local 5
+push constant 1
+neg
+gt
+push local 5
+push constant 256
+lt
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push local 4
 push local 2
 add
@@ -422,18 +575,13 @@ add
 push constant 1
 sub
 pop local 8
-push argument 1
-push constant 4
-add
-push local 4
-add
-pop local 5
 push local 7
 push local 5
 push local 8
 push local 5
 call Screen.drawRectangle 4
 pop temp 0
+label IF_FALSE1
 push local 4
 push constant 1
 add

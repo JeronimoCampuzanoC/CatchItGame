@@ -3,6 +3,74 @@
 // Uses Screen.drawRectangle with horizontal spans (no bit ops).
 
 class HeartSprite {
+    field int y, prevY, column;
+    field bool active;
+
+    constructor HeartSprite new(int col) {
+        let column = col;
+        let y = 0;
+        let prevY = -1;
+        let active = true;
+        return this;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method int getY() {
+        return y;
+    }
+
+    method void setY(int newY) {
+        let y = newY;
+        return;
+    }
+
+    method void updatePosition(int speed) {
+        let prevY = y;
+        let y = y + speed;
+        return;
+    }
+
+    method void draw() {
+        do Screen.setColor(true);
+        do HeartSprite.drawAtColumnTopWithOffset(column, y);
+        return;
+    }
+
+    method void erase() {
+        if (prevY > (-1)) {
+            do Screen.setColor(false);
+            do HeartSprite.drawAtColumnTopWithOffset(column, prevY);
+        }
+        return;
+    }
+
+    method void eraseCurrent() {
+        do Screen.setColor(false);
+        do HeartSprite.drawAtColumnTopWithOffset(column, y);
+        return;
+    }
+
+    method bool isActive() {
+        return active;
+    }
+
+    method void setActive(bool val) {
+        let active = val;
+        return;
+    }
+
+    method int getDistanceFrom(int targetY) {
+        var int dy;
+        let dy = y - targetY;
+        if (dy < 0) {
+            let dy = 0 - dy;
+        }
+        return dy;
+    }
 
     // Convenience: draw at top of a column, yOffset lets you lower it a little.
     function void drawAtColumnTop(int column) {
@@ -33,17 +101,20 @@ class HeartSprite {
 
         let i = 0;
         while (i < 4) {
-            let halfGap = g[i] / 2;                 // keep gaps even numbers
-            // Left lobe span
-            let left0 = cx - halfGap - s[i];
-            let left1 = left0 + s[i] - 1;
-            // Right lobe span
-            let right0 = cx + halfGap;
-            let right1 = right0 + s[i] - 1;
-
             let y = yTop + i;
-            do Screen.drawRectangle(left0,  y, left1,  y);
-            do Screen.drawRectangle(right0, y, right1, y);
+            // Only draw if within screen bounds
+            if ((y > (-1)) & (y < 256)) {
+                let halfGap = g[i] / 2;                 // keep gaps even numbers
+                // Left lobe span
+                let left0 = cx - halfGap - s[i];
+                let left1 = left0 + s[i] - 1;
+                // Right lobe span
+                let right0 = cx + halfGap;
+                let right1 = right0 + s[i] - 1;
+
+                do Screen.drawRectangle(left0,  y, left1,  y);
+                do Screen.drawRectangle(right0, y, right1, y);
+            }
 
             let i = i + 1;
         }
@@ -61,12 +132,15 @@ class HeartSprite {
 
         let j = 0;
         while (j < 28) {
-            let half = w[j] / 2;
-            let x0 = cx - half;
-            let x1 = cx + half - 1;                 // inclusive end
-
             let y = yTop + 4 + j;                   // rows 4..31
-            do Screen.drawRectangle(x0, y, x1, y);
+            // Only draw if within screen bounds
+            if ((y > (-1)) & (y < 256)) {
+                let half = w[j] / 2;
+                let x0 = cx - half;
+                let x1 = cx + half - 1;                 // inclusive end
+
+                do Screen.drawRectangle(x0, y, x1, y);
+            }
 
             let j = j + 1;
         }
