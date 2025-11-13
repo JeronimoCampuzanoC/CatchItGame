@@ -18,17 +18,43 @@ class Dropper {
     method int getAndIncrement() {
         let i = i + 1;
         let sprite = 0;
+        
+        // Random sequence with interval of 60
+        if (i = 60) {
+            let sprite = 2;
+        }
+        if (i = 120) {
+            let sprite = 4;
+        }
         if (i = 180) {
             let sprite = 1;
         }
-        if (i = 360) {
-            let sprite = 2;
-        }
-        if (i = 540) {
+        if (i = 240) {
             let sprite = 3;
         }
-        if (i = 720) {
+        if (i = 300) {
+            let sprite = 1;
+        }
+        if (i = 360) {
             let sprite = 4;
+        }
+        if (i = 420) {
+            let sprite = 2;
+        }
+        if (i = 480) {
+            let sprite = 3;
+        }
+        if (i = 540) {
+            let sprite = 1;
+        }
+        if (i = 600) {
+            let sprite = 2;
+        }
+        if (i = 660) {
+            let sprite = 4;
+        }
+        if (i = 720) {
+            let sprite = 3;
         }
         if (i = 721) {
             let i = 0;

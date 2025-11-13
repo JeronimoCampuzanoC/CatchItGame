@@ -32,6 +32,9 @@ class Points {
         // Letter E
         do drawE(x, y + 72);
         
+        // Draw initial points (0)
+        do drawPoints();
+        
         return;
     }
     
@@ -105,6 +108,21 @@ class Points {
     // Method to add a point
     method void addPoint() {
         let points = points + 1; // Increment points by 1
+        do drawPoints(); // Redraw the points after incrementing
+        return;
+    }
+
+    // Method to draw the points value below "Score"
+    method void drawPoints() {
+        // Clear the points area first (below "Score" text)
+        do Screen.setColor(false);
+        do Screen.drawRectangle(10, 100, 40, 115);
+        
+        // Draw the new points value
+        do Screen.setColor(true);
+        do Output.moveCursor(12, 1);  // Position lower (row 12 instead of 6)
+        do Output.printInt(points);
+        
         return;
     }
 
