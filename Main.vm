@@ -32,6 +32,9 @@ call Dropper.new 0
 pop local 5
 call Screen.clearScreen 0
 pop temp 0
+push local 4
+call Points.drawScore 1
+pop temp 0
 label WHILE_EXP0
 push local 13
 push constant 0

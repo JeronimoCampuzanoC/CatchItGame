@@ -6,6 +6,313 @@ push constant 0
 pop this 0
 push pointer 0
 return
+function Points.drawScore 2
+push argument 0
+pop pointer 0
+push constant 10
+pop local 0
+push constant 10
+pop local 1
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push pointer 0
+push local 0
+push local 1
+call Points.drawS 3
+pop temp 0
+push pointer 0
+push local 0
+push local 1
+push constant 18
+add
+call Points.drawC 3
+pop temp 0
+push pointer 0
+push local 0
+push local 1
+push constant 36
+add
+call Points.drawO 3
+pop temp 0
+push pointer 0
+push local 0
+push local 1
+push constant 54
+add
+call Points.drawR 3
+pop temp 0
+push pointer 0
+push local 0
+push local 1
+push constant 72
+add
+call Points.drawE 3
+pop temp 0
+push constant 0
+return
+function Points.drawS 0
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push argument 1
+push constant 2
+add
+push argument 2
+push constant 6
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push constant 6
+add
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 8
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push constant 8
+add
+push argument 2
+push constant 8
+add
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push constant 12
+add
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Points.drawC 0
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push argument 1
+push constant 2
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push constant 12
+add
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Points.drawO 0
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push argument 1
+push constant 2
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push constant 8
+add
+push argument 2
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push constant 12
+add
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Points.drawR 0
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+push argument 1
+push constant 2
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push constant 6
+add
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 8
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push constant 8
+add
+push argument 2
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 8
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push constant 6
+add
+push argument 2
+push constant 8
+add
+push argument 1
+push constant 8
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Points.drawE 0
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+push argument 1
+push constant 2
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 2
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push constant 6
+add
+push argument 1
+push constant 8
+add
+push argument 2
+push constant 8
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 1
+push argument 2
+push constant 12
+add
+push argument 1
+push constant 10
+add
+push argument 2
+push constant 14
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
 function Points.addPoint 0
 push argument 0
 pop pointer 0

@@ -4,6 +4,104 @@ class Points {
         let points = 0;  // Initialize points to 0
         return this;
     }
+    
+    // Method to draw "Score" rotated 90 degrees clockwise in rectangle (0,0) to (50,110)
+    method void drawScore() {
+        // Drawing "Score" vertically (rotated 90 degrees clockwise)
+        // Letters will be drawn horizontally as if the word is standing up
+        // Area: x: 0-50, y: 0-110
+        
+        var int x, y;
+        let x = 10;  // Starting x position
+        let y = 10;  // Starting y position
+        
+        do Screen.setColor(true);
+        
+        // Letter S (rotated 90 degrees clockwise)
+        do drawS(x, y);
+        
+        // Letter C
+        do drawC(x, y + 18);
+        
+        // Letter O
+        do drawO(x, y + 36);
+        
+        // Letter R
+        do drawR(x, y + 54);
+        
+        // Letter E
+        do drawE(x, y + 72);
+        
+        return;
+    }
+    
+    // Draw letter S rotated 90 degrees clockwise
+    method void drawS(int x, int y) {
+        // Top horizontal line
+        do Screen.drawRectangle(x, y, x + 10, y + 2);
+        // Top left vertical
+        do Screen.drawRectangle(x, y, x + 2, y + 6);
+        // Middle horizontal
+        do Screen.drawRectangle(x, y + 6, x + 10, y + 8);
+        // Bottom right vertical
+        do Screen.drawRectangle(x + 8, y + 8, x + 10, y + 14);
+        // Bottom horizontal
+        do Screen.drawRectangle(x, y + 12, x + 10, y + 14);
+        return;
+    }
+    
+    // Draw letter C rotated 90 degrees clockwise
+    method void drawC(int x, int y) {
+        // Top horizontal
+        do Screen.drawRectangle(x, y, x + 10, y + 2);
+        // Left vertical
+        do Screen.drawRectangle(x, y, x + 2, y + 14);
+        // Bottom horizontal
+        do Screen.drawRectangle(x, y + 12, x + 10, y + 14);
+        return;
+    }
+    
+    // Draw letter O rotated 90 degrees clockwise
+    method void drawO(int x, int y) {
+        // Top horizontal
+        do Screen.drawRectangle(x, y, x + 10, y + 2);
+        // Left vertical
+        do Screen.drawRectangle(x, y, x + 2, y + 14);
+        // Right vertical
+        do Screen.drawRectangle(x + 8, y, x + 10, y + 14);
+        // Bottom horizontal
+        do Screen.drawRectangle(x, y + 12, x + 10, y + 14);
+        return;
+    }
+    
+    // Draw letter R rotated 90 degrees clockwise
+    method void drawR(int x, int y) {
+        // Left vertical
+        do Screen.drawRectangle(x, y, x + 2, y + 14);
+        // Top horizontal
+        do Screen.drawRectangle(x, y, x + 10, y + 2);
+        // Middle horizontal
+        do Screen.drawRectangle(x, y + 6, x + 10, y + 8);
+        // Top right vertical
+        do Screen.drawRectangle(x + 8, y, x + 10, y + 8);
+        // Diagonal leg
+        do Screen.drawRectangle(x + 6, y + 8, x + 8, y + 14);
+        return;
+    }
+    
+    // Draw letter E rotated 90 degrees clockwise
+    method void drawE(int x, int y) {
+        // Left vertical
+        do Screen.drawRectangle(x, y, x + 2, y + 14);
+        // Top horizontal
+        do Screen.drawRectangle(x, y, x + 10, y + 2);
+        // Middle horizontal
+        do Screen.drawRectangle(x, y + 6, x + 8, y + 8);
+        // Bottom horizontal
+        do Screen.drawRectangle(x, y + 12, x + 10, y + 14);
+        return;
+    }
+    
     // Method to add a point
     method void addPoint() {
         let points = points + 1; // Increment points by 1

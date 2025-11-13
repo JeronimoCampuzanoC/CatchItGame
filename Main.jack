@@ -32,10 +32,13 @@ class Main {
         let diamondSprite = DiamondSprite.new(3);
         let clubSprite = ClubSprite.new(4);
         let pointsObject = Points.new();
+        
 
         let dropperObject = Dropper.new();
 
         do Screen.clearScreen();
+
+        do pointsObject.drawScore();
 
         while (gameRunning = true) {
 
