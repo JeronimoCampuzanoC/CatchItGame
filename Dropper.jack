@@ -17,7 +17,7 @@ class Dropper {
     // Returns the current value of i and then increments it
     method int getAndIncrement() {
         let i = i + 1;
-        
+        let sprite = 0;
         if (i = 180) {
             let sprite = 1;
         }
