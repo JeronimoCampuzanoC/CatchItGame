@@ -7,6 +7,7 @@ class Main {
         var DiamondSprite diamondSprite;
         var ClubSprite clubSprite;
         var Points pointsObject;
+        var Dropper dropperObject;
 
         // Variables pa ver lo del teclado
         var int key, lastKey;
@@ -26,14 +27,42 @@ class Main {
 
         // Instantiate sprites and points
         let heartSprite = HeartSprite.new(1);
+        
         let spadeSprite = SpadeSprite.new(2);
         let diamondSprite = DiamondSprite.new(3);
         let clubSprite = ClubSprite.new(4);
         let pointsObject = Points.new();
 
+        let dropperObject = Dropper.new();
+
         do Screen.clearScreen();
 
         while (gameRunning = true) {
+
+            //Check Dropper
+            
+            if(dropperObject.getAndIncrement() = 1){
+                do heartSprite.setActive(true);
+                do heartSprite.setY(0);
+            }
+
+            if(dropperObject.getValue() = 2){
+                do spadeSprite.setActive(true);
+                do spadeSprite.setY(0);
+            }
+
+            if(dropperObject.getValue() = 3){
+                do diamondSprite.setActive(true);
+                do diamondSprite.setY(0);
+            }
+
+            if(dropperObject.getValue() = 4){
+                do clubSprite.setActive(true);
+                do clubSprite.setY(0);
+            }
+
+            // Check Keyboard
+
             let key = Keyboard.keyPressed();
 
             // Checkea lo de la tecla, y si la coge frena el programa
@@ -89,6 +118,8 @@ class Main {
                 }
             }
 
+            //Down sprites
+
             // Borrado en la posicion anterior
             if (heartSprite.isActive()) {
                 do heartSprite.erase();
@@ -127,6 +158,8 @@ class Main {
             
             let lastKey = key;
             do Sys.wait(16);
+
+
         }
 
         // Cleanup

@@ -9,7 +9,7 @@ class ClubSprite {
         let column = col;
         let y = 0;
         let prevY = -1;
-        let active = true;
+        let active = false;
         return this;
     }
 

@@ -1,0 +1,50 @@
+// Dropper.jack
+// A class that maintains a counter that increments each time it's called
+class Dropper {
+    field int i;
+    field int sprite;
+
+    constructor Dropper new() {
+        let i = 0;
+        return this;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // Returns the current value of i and then increments it
+    method int getAndIncrement() {
+        let i = i + 1;
+        
+        if (i = 180) {
+            let sprite = 1;
+        }
+        if (i = 360) {
+            let sprite = 2;
+        }
+        if (i = 540) {
+            let sprite = 3;
+        }
+        if (i = 720) {
+            let sprite = 4;
+        }
+        if (i = 721) {
+            let i = 0;
+        }
+        
+        return sprite;
+    }
+
+    // Optional: Method to reset the counter
+    method void reset() {
+        let i = 0;
+        return;
+    }
+
+    // Optional: Method to get the current value without incrementing
+    method int getValue() {
+        return sprite;
+    }
+}

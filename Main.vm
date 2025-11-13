@@ -1,19 +1,19 @@
-function Main.main 13
+function Main.main 14
 push constant 2
-pop local 7
+pop local 8
 push constant 256
 push constant 32
 sub
-pop local 8
-push constant 200
 pop local 9
-push constant 8
+push constant 200
 pop local 10
+push constant 8
+pop local 11
 push constant 0
-pop local 6
+pop local 7
 push constant 0
 not
-pop local 12
+pop local 13
 push constant 1
 call HeartSprite.new 1
 pop local 0
@@ -28,47 +28,117 @@ call ClubSprite.new 1
 pop local 3
 call Points.new 0
 pop local 4
+call Dropper.new 0
+pop local 5
 call Screen.clearScreen 0
 pop temp 0
 label WHILE_EXP0
-push local 12
+push local 13
 push constant 0
 not
 eq
 not
 if-goto WHILE_END0
-call Keyboard.keyPressed 0
-pop local 5
 push local 5
-push constant 130
+call Dropper.getAndIncrement 1
+push constant 1
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push local 6
-push constant 130
-eq
+push local 0
+push constant 0
 not
+call HeartSprite.setActive 2
+pop temp 0
+push local 0
+push constant 0
+call HeartSprite.setY 2
+pop temp 0
+label IF_FALSE0
+push local 5
+call Dropper.getValue 1
+push constant 2
+eq
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-push local 0
-push local 9
-call HeartSprite.getDistanceFrom 2
-pop local 11
-push local 11
-push local 10
-push constant 1
-add
-lt
+push local 1
+push constant 0
+not
+call SpadeSprite.setActive 2
+pop temp 0
+push local 1
+push constant 0
+call SpadeSprite.setY 2
+pop temp 0
+label IF_FALSE1
+push local 5
+call Dropper.getValue 1
+push constant 3
+eq
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
-push local 0
-call HeartSprite.isActive 1
+push local 2
+push constant 0
+not
+call DiamondSprite.setActive 2
+pop temp 0
+push local 2
+push constant 0
+call DiamondSprite.setY 2
+pop temp 0
+label IF_FALSE2
+push local 5
+call Dropper.getValue 1
+push constant 4
+eq
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
+push local 3
+push constant 0
+not
+call ClubSprite.setActive 2
+pop temp 0
+push local 3
+push constant 0
+call ClubSprite.setY 2
+pop temp 0
+label IF_FALSE3
+call Keyboard.keyPressed 0
+pop local 6
+push local 6
+push constant 130
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 7
+push constant 130
+eq
+not
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push local 0
+push local 10
+call HeartSprite.getDistanceFrom 2
+pop local 12
+push local 12
+push local 11
+push constant 1
+add
+lt
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push local 0
+call HeartSprite.isActive 1
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
 push local 0
 call HeartSprite.eraseCurrent 1
 pop temp 0
@@ -79,40 +149,40 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
-label IF_FALSE3
-label IF_FALSE2
-label IF_FALSE1
-label IF_FALSE0
-push local 5
-push constant 131
-eq
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
+label IF_FALSE7
+label IF_FALSE6
+label IF_FALSE5
+label IF_FALSE4
 push local 6
 push constant 131
 eq
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push local 7
+push constant 131
+eq
 not
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
 push local 1
-push local 9
-call SpadeSprite.getDistanceFrom 2
-pop local 11
-push local 11
 push local 10
+call SpadeSprite.getDistanceFrom 2
+pop local 12
+push local 12
+push local 11
 push constant 1
 add
 lt
-if-goto IF_TRUE6
-goto IF_FALSE6
-label IF_TRUE6
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
 push local 1
 call SpadeSprite.isActive 1
-if-goto IF_TRUE7
-goto IF_FALSE7
-label IF_TRUE7
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
 push local 1
 call SpadeSprite.eraseCurrent 1
 pop temp 0
@@ -123,40 +193,40 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
-label IF_FALSE7
-label IF_FALSE6
-label IF_FALSE5
-label IF_FALSE4
-push local 5
-push constant 132
-eq
-if-goto IF_TRUE8
-goto IF_FALSE8
-label IF_TRUE8
+label IF_FALSE11
+label IF_FALSE10
+label IF_FALSE9
+label IF_FALSE8
 push local 6
 push constant 132
 eq
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push local 7
+push constant 132
+eq
 not
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
 push local 3
-push local 9
-call ClubSprite.getDistanceFrom 2
-pop local 11
-push local 11
 push local 10
+call ClubSprite.getDistanceFrom 2
+pop local 12
+push local 12
+push local 11
 push constant 1
 add
 lt
-if-goto IF_TRUE10
-goto IF_FALSE10
-label IF_TRUE10
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
 push local 3
 call ClubSprite.isActive 1
-if-goto IF_TRUE11
-goto IF_FALSE11
-label IF_TRUE11
+if-goto IF_TRUE15
+goto IF_FALSE15
+label IF_TRUE15
 push local 3
 call ClubSprite.eraseCurrent 1
 pop temp 0
@@ -167,40 +237,40 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
-label IF_FALSE11
-label IF_FALSE10
-label IF_FALSE9
-label IF_FALSE8
-push local 5
-push constant 133
-eq
-if-goto IF_TRUE12
-goto IF_FALSE12
-label IF_TRUE12
+label IF_FALSE15
+label IF_FALSE14
+label IF_FALSE13
+label IF_FALSE12
 push local 6
 push constant 133
 eq
+if-goto IF_TRUE16
+goto IF_FALSE16
+label IF_TRUE16
+push local 7
+push constant 133
+eq
 not
-if-goto IF_TRUE13
-goto IF_FALSE13
-label IF_TRUE13
+if-goto IF_TRUE17
+goto IF_FALSE17
+label IF_TRUE17
 push local 2
-push local 9
-call DiamondSprite.getDistanceFrom 2
-pop local 11
-push local 11
 push local 10
+call DiamondSprite.getDistanceFrom 2
+pop local 12
+push local 12
+push local 11
 push constant 1
 add
 lt
-if-goto IF_TRUE14
-goto IF_FALSE14
-label IF_TRUE14
+if-goto IF_TRUE18
+goto IF_FALSE18
+label IF_TRUE18
 push local 2
 call DiamondSprite.isActive 1
-if-goto IF_TRUE15
-goto IF_FALSE15
-label IF_TRUE15
+if-goto IF_TRUE19
+goto IF_FALSE19
+label IF_TRUE19
 push local 2
 call DiamondSprite.eraseCurrent 1
 pop temp 0
@@ -211,59 +281,17 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
-label IF_FALSE15
-label IF_FALSE14
-label IF_FALSE13
-label IF_FALSE12
-push local 0
-call HeartSprite.isActive 1
-if-goto IF_TRUE16
-goto IF_FALSE16
-label IF_TRUE16
-push local 0
-call HeartSprite.erase 1
-pop temp 0
-label IF_FALSE16
-push local 1
-call SpadeSprite.isActive 1
-if-goto IF_TRUE17
-goto IF_FALSE17
-label IF_TRUE17
-push local 1
-call SpadeSprite.erase 1
-pop temp 0
-label IF_FALSE17
-push local 2
-call DiamondSprite.isActive 1
-if-goto IF_TRUE18
-goto IF_FALSE18
-label IF_TRUE18
-push local 2
-call DiamondSprite.erase 1
-pop temp 0
-label IF_FALSE18
-push local 3
-call ClubSprite.isActive 1
-if-goto IF_TRUE19
-goto IF_FALSE19
-label IF_TRUE19
-push local 3
-call ClubSprite.erase 1
-pop temp 0
 label IF_FALSE19
-push constant 0
-not
-call Screen.setColor 1
-pop temp 0
-call ScreenInitial.divideIntoFourColumns 0
-pop temp 0
+label IF_FALSE18
+label IF_FALSE17
+label IF_FALSE16
 push local 0
 call HeartSprite.isActive 1
 if-goto IF_TRUE20
 goto IF_FALSE20
 label IF_TRUE20
 push local 0
-call HeartSprite.draw 1
+call HeartSprite.erase 1
 pop temp 0
 label IF_FALSE20
 push local 1
@@ -272,7 +300,7 @@ if-goto IF_TRUE21
 goto IF_FALSE21
 label IF_TRUE21
 push local 1
-call SpadeSprite.draw 1
+call SpadeSprite.erase 1
 pop temp 0
 label IF_FALSE21
 push local 2
@@ -281,7 +309,7 @@ if-goto IF_TRUE22
 goto IF_FALSE22
 label IF_TRUE22
 push local 2
-call DiamondSprite.draw 1
+call DiamondSprite.erase 1
 pop temp 0
 label IF_FALSE22
 push local 3
@@ -290,27 +318,69 @@ if-goto IF_TRUE23
 goto IF_FALSE23
 label IF_TRUE23
 push local 3
-call ClubSprite.draw 1
+call ClubSprite.erase 1
 pop temp 0
 label IF_FALSE23
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+call ScreenInitial.divideIntoFourColumns 0
+pop temp 0
 push local 0
-push local 7
+call HeartSprite.isActive 1
+if-goto IF_TRUE24
+goto IF_FALSE24
+label IF_TRUE24
+push local 0
+call HeartSprite.draw 1
+pop temp 0
+label IF_FALSE24
+push local 1
+call SpadeSprite.isActive 1
+if-goto IF_TRUE25
+goto IF_FALSE25
+label IF_TRUE25
+push local 1
+call SpadeSprite.draw 1
+pop temp 0
+label IF_FALSE25
+push local 2
+call DiamondSprite.isActive 1
+if-goto IF_TRUE26
+goto IF_FALSE26
+label IF_TRUE26
+push local 2
+call DiamondSprite.draw 1
+pop temp 0
+label IF_FALSE26
+push local 3
+call ClubSprite.isActive 1
+if-goto IF_TRUE27
+goto IF_FALSE27
+label IF_TRUE27
+push local 3
+call ClubSprite.draw 1
+pop temp 0
+label IF_FALSE27
+push local 0
+push local 8
 call HeartSprite.updatePosition 2
 pop temp 0
 push local 1
-push local 7
+push local 8
 call SpadeSprite.updatePosition 2
 pop temp 0
 push local 2
-push local 7
+push local 8
 call DiamondSprite.updatePosition 2
 pop temp 0
 push local 3
-push local 7
+push local 8
 call ClubSprite.updatePosition 2
 pop temp 0
-push local 5
-pop local 6
+push local 6
+pop local 7
 push constant 16
 call Sys.wait 1
 pop temp 0

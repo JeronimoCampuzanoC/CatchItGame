@@ -10,7 +10,6 @@ push constant 1
 neg
 pop this 1
 push constant 0
-not
 pop this 3
 push pointer 0
 return
