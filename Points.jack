@@ -112,6 +112,16 @@ class Points {
         return;
     }
 
+    // Method to subtract a point
+    method void subtractPoint() {
+        let points = points - 1; // Decrement points by 1
+        if (points < 0) {
+            let points = 0; // Don't allow negative points
+        }
+        do drawPoints(); // Redraw the points after decrementing
+        return;
+    }
+
     // Method to draw the points value below "Score"
     method void drawPoints() {
         // Clear the points area first (below "Score" text)

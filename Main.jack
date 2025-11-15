@@ -159,8 +159,44 @@ class Main {
             do diamondSprite.updatePosition(speed);
             do clubSprite.updatePosition(speed);
             
+            // Check if sprites reached the bottom (y >= 256) - user missed them
+            if (heartSprite.isActive()) {
+                if (~(heartSprite.getY() < 256)) {
+                    do heartSprite.setActive(false);
+                    do pointsObject.subtractPoint();
+                    let speed = speed + 1;
+                }
+            }
+            
+            if (spadeSprite.isActive()) {
+                if (~(spadeSprite.getY() < 256)) {
+                    do spadeSprite.setActive(false);
+                    do pointsObject.subtractPoint();
+                    let speed = speed + 1;
+                }
+            }
+            
+            if (diamondSprite.isActive()) {
+                if (~(diamondSprite.getY() < 256)) {
+                    do diamondSprite.setActive(false);
+                    do pointsObject.subtractPoint();
+                    let speed = speed + 1;
+                }
+            }
+            
+            if (clubSprite.isActive()) {
+                if (~(clubSprite.getY() < 256)) {
+                    do clubSprite.setActive(false);
+                    do pointsObject.subtractPoint();
+                    let speed = speed + 1;
+                }
+            }
+
+
             let lastKey = key;
             do Sys.wait(16);
+
+
 
 
         }
