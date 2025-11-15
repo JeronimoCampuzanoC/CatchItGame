@@ -77,6 +77,7 @@ class Main {
                             do heartSprite.eraseCurrent();
                             do heartSprite.setActive(false);
                             do pointsObject.addPoint();
+                            let speed = Main.checkSpeedIncrease(pointsObject.getPoint(), speed);
                         }
                     }
                 }
@@ -90,6 +91,7 @@ class Main {
                             do spadeSprite.eraseCurrent();
                             do spadeSprite.setActive(false);
                             do pointsObject.addPoint();
+                            let speed = Main.checkSpeedIncrease(pointsObject.getPoint(), speed);
                         }
                     }
                 }
@@ -103,6 +105,7 @@ class Main {
                             do clubSprite.eraseCurrent();
                             do clubSprite.setActive(false);
                             do pointsObject.addPoint();
+                            let speed = Main.checkSpeedIncrease(pointsObject.getPoint(), speed);
                         }
                     }
                 }
@@ -116,6 +119,7 @@ class Main {
                             do diamondSprite.eraseCurrent();
                             do diamondSprite.setActive(false);
                             do pointsObject.addPoint();
+                            let speed = Main.checkSpeedIncrease(pointsObject.getPoint(), speed);
                         }
                     }
                 }
@@ -164,7 +168,6 @@ class Main {
                 if (~(heartSprite.getY() < 256)) {
                     do heartSprite.setActive(false);
                     do pointsObject.subtractPoint();
-                    let speed = speed + 1;
                 }
             }
             
@@ -172,7 +175,6 @@ class Main {
                 if (~(spadeSprite.getY() < 256)) {
                     do spadeSprite.setActive(false);
                     do pointsObject.subtractPoint();
-                    let speed = speed + 1;
                 }
             }
             
@@ -180,7 +182,6 @@ class Main {
                 if (~(diamondSprite.getY() < 256)) {
                     do diamondSprite.setActive(false);
                     do pointsObject.subtractPoint();
-                    let speed = speed + 1;
                 }
             }
             
@@ -188,15 +189,12 @@ class Main {
                 if (~(clubSprite.getY() < 256)) {
                     do clubSprite.setActive(false);
                     do pointsObject.subtractPoint();
-                    let speed = speed + 1;
                 }
             }
 
-
+            
             let lastKey = key;
             do Sys.wait(16);
-
-
 
 
         }
@@ -208,5 +206,15 @@ class Main {
         do clubSprite.dispose();
 
         return;
+    }
+
+    // Function to check if speed should increase based on points
+    // Increases speed by 1 every 5 points
+    function int checkSpeedIncrease(int points, int currentSpeed) {
+        // Check if points is a multiple of 5
+        if (((points / 20) * 20) = points) {
+            return currentSpeed + 1;
+        }
+        return currentSpeed;
     }
 }

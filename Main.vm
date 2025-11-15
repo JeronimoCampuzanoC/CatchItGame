@@ -152,6 +152,11 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
+push local 4
+call Points.getPoint 1
+push local 8
+call Main.checkSpeedIncrease 2
+pop local 8
 label IF_FALSE7
 label IF_FALSE6
 label IF_FALSE5
@@ -196,6 +201,11 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
+push local 4
+call Points.getPoint 1
+push local 8
+call Main.checkSpeedIncrease 2
+pop local 8
 label IF_FALSE11
 label IF_FALSE10
 label IF_FALSE9
@@ -240,6 +250,11 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
+push local 4
+call Points.getPoint 1
+push local 8
+call Main.checkSpeedIncrease 2
+pop local 8
 label IF_FALSE15
 label IF_FALSE14
 label IF_FALSE13
@@ -284,6 +299,11 @@ pop temp 0
 push local 4
 call Points.addPoint 1
 pop temp 0
+push local 4
+call Points.getPoint 1
+push local 8
+call Main.checkSpeedIncrease 2
+pop local 8
 label IF_FALSE19
 label IF_FALSE18
 label IF_FALSE17
@@ -402,10 +422,6 @@ pop temp 0
 push local 4
 call Points.subtractPoint 1
 pop temp 0
-push local 8
-push constant 1
-add
-pop local 8
 label IF_FALSE29
 label IF_FALSE28
 push local 1
@@ -428,10 +444,6 @@ pop temp 0
 push local 4
 call Points.subtractPoint 1
 pop temp 0
-push local 8
-push constant 1
-add
-pop local 8
 label IF_FALSE31
 label IF_FALSE30
 push local 2
@@ -454,10 +466,6 @@ pop temp 0
 push local 4
 call Points.subtractPoint 1
 pop temp 0
-push local 8
-push constant 1
-add
-pop local 8
 label IF_FALSE33
 label IF_FALSE32
 push local 3
@@ -480,10 +488,6 @@ pop temp 0
 push local 4
 call Points.subtractPoint 1
 pop temp 0
-push local 8
-push constant 1
-add
-pop local 8
 label IF_FALSE35
 label IF_FALSE34
 push local 6
@@ -506,4 +510,22 @@ push local 3
 call ClubSprite.dispose 1
 pop temp 0
 push constant 0
+return
+function Main.checkSpeedIncrease 0
+push argument 0
+push constant 10
+call Math.divide 2
+push constant 10
+call Math.multiply 2
+push argument 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 1
+push constant 1
+add
+return
+label IF_FALSE0
+push argument 1
 return
